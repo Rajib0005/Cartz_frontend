@@ -5,7 +5,7 @@ import { productDetailsReducer, productReducer } from "./reducers/productReducer
 
 const reducer = combineReducers({
     products: productReducer,
-    poductDetails: productDetailsReducer,
+    productDetails: productDetailsReducer,
 });
 
 let initialState = {};
@@ -15,7 +15,7 @@ const middleware = [thunk];
 const store = createStore(
     reducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(...middleware)),
 );
 
 export default store;

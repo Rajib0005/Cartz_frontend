@@ -2,9 +2,9 @@ import {
     ALL_PRODUCT_REQUEST, 
     ALL_PRODUCT_FAIL, 
     ALL_PRODUCT_SUCESS, 
-    PRODUCT_DETAILS__FAIL,
-    PRODUCT_DETAILS__REQUEST,
-    PRODUCT_DETAILS__SUCESS,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCESS,
+    PRODUCT_DETAILS_FAIL,
     CLEAR_ERRORS } from "../constants/productConstants";
     
 export const productReducer = (
@@ -20,7 +20,7 @@ export const productReducer = (
             return {
                 loading: false,
                 products: action.payload.products,
-                productsCount: action.payload.productsCount,
+                prodcount: action.payload.prodcount,
             }
         case ALL_PRODUCT_FAIL:
             return {
@@ -39,33 +39,34 @@ export const productReducer = (
     }
 }
 
+
 export const productDetailsReducer = (
-    state = { product: {} },
-    action) => {
-    switch (action.type) {
-        case PRODUCT_DETAILS__REQUEST:
-            return {
-                loading: true,
-                ...state,
-            }
-        case PRODUCT_DETAILS__SUCESS:
-            return {
-                loading: false,
-                product: action.payload,
-            }
-        case PRODUCT_DETAILS__FAIL:
-            return {
-                loading: false,
-                error: action.payload,
-            }
+  state = { product: {} },
+  action) => {
+  switch (action.type) {
+      case PRODUCT_DETAILS_REQUEST:
+          return {
+              loading: true,
+              ...state,
+          }
+      case PRODUCT_DETAILS_SUCESS:
+          return {
+              loading: false,
+              product: action.payload,
+          }
+      case PRODUCT_DETAILS_FAIL:
+          return {
+              loading: false,
+              error: action.payload,
+          }
 
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null
-            }
+      case CLEAR_ERRORS:
+          return {
+              ...state,
+              error: null
+          }
 
-        default:
-            return state;
-    }
+      default:
+          return state;
+  }
 }
