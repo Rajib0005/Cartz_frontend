@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productActions"
 import { useParams } from "react-router-dom";
 import Loader from '../layout/Loader/Loader';
+import MetaData from '../layout/MetaData'
 
 
 const ProductDetails = (props) => {
@@ -16,29 +17,25 @@ const ProductDetails = (props) => {
     useEffect(() => {
         dispatch(getProductDetails(productId));
     }, [dispatch, productId]);
-
+    console.log(product.name);
     return (
         <Fragment>
             {loading ? (<Loader />)
                 : (
                     <Fragment>
-                        <div className='ProductDetails'>
+                        <MetaData title={`${product.name} -- Cartz`} />
+                        <div className="ProductDetails">
                             <div>
                                 <Carousel>
                                     {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                    
-                  ))}
-
-                        {/* <img src="https://www.leatherclue.com/image/cache/catalog/AB_TEES/Plain%20T/royal-blue-men-s-tshirt-550x550h.jpg"
-                            className="CarouselImage"
-                        /> */}
+                                        product.images.map((item, i) => (
+                                            <img
+                                                className="CarouselImage"
+                                                key={item.url}
+                                                src={item.url}
+                                                alt={`${i} Slide`}
+                                            />
+                                        ))}
                                 </Carousel>
                             </div>
                         </div>

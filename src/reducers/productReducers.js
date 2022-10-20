@@ -52,12 +52,12 @@ export const productDetailsReducer = (
       case PRODUCT_DETAILS_SUCESS:
           return {
               loading: false,
-              product: action.payload,
+              product: action.payload.product,
           }
       case PRODUCT_DETAILS_FAIL:
           return {
               loading: false,
-              error: action.payload,
+              error: action.payload.product,
           }
 
       case CLEAR_ERRORS:
