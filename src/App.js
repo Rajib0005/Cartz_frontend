@@ -4,6 +4,7 @@ import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer.js";
 import Home from "./components/Home/Home.js";
 import ProductDetails from './components/Product/ProductDetails.js'
+import LoginSignup from "./components/User/LoginSignup";
 function App() {
 
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route  path='/' element={<Home />} />
         <Route  path='/products/:id' element={<ProductDetails />} />
+        <Route  path='/login' element={<LoginSignup />} />
       </Routes>
       <Footer />
     </Router>
