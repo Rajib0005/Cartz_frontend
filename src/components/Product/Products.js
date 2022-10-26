@@ -3,19 +3,23 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getProduct } from '../../actions/productActions';
 import Loader from '../layout/Loader/Loader'
 import ProductCard from '../Home/ProductCard';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
+import './ProductDetails.css'
+import {useLocation} from 'react-router-dom';
 
-function Products(props) {
-    const { keyword } = useParams();
-    const key = keyword;
-    const dispatch = useDispatch();
+function Products() {
+    const location = useLocation().search;
+    const name = new URLSearchParams(location).get('keyword');
+    const key = name;
+   const dispatch = useDispatch();
     const { products, loading } = useSelector((state) => state.products);
 
     useEffect(() => {
         dispatch(getProduct(key));
     }, [dispatch, key]);
 
-//    console.log(key)
+   console.log(key)
+ 
 
     return (
         <Fragment>{loading ? <Loader /> :
@@ -26,7 +30,7 @@ function Products(props) {
                         <ProductCard key = {product._id} product={product} />
                     ))}
                 </div>
-
+ 
             </Fragment>}
         </Fragment>
     )
