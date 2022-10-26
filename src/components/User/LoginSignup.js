@@ -1,5 +1,5 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
-import {useDispatch} from 'react-redux';
+import React, { Fragment, useRef, useState } from 'react';
+// import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -10,7 +10,7 @@ import './LoginSignup.css'
 
 function LoginSignup() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const loginTab = useRef(null);
     const registerTab = useRef(null);
     const switcherTab = useRef(null);
