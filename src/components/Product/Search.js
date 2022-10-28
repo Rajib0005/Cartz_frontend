@@ -11,7 +11,7 @@ const Search = () => {
     const searchSubmitHandler = (e) => {
       e.preventDefault();
 
-      console.log(keyword);
+      //console.log(keyword);
 
       if (keyword.trim()) {
        navigate(`/products?keyword=${keyword}`);

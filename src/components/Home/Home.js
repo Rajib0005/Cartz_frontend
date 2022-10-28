@@ -11,10 +11,10 @@ import Loader from '../layout/Loader/Loader';
 const Home = () => {
 
   const dispatch = useDispatch();
-  const {loading,products} = useSelector(
+  const {loading,products,resultPerPage} = useSelector(
     state => state.products
   )
-
+    console.log(resultPerPage);
   useEffect(() => {
     dispatch(getProduct())
   }, [dispatch]);
