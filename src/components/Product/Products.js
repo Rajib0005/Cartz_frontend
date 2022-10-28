@@ -6,21 +6,40 @@ import ProductCard from '../Home/ProductCard';
 import { useParams } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import "./Products.css";
+import Typography from '@mui/material/Typography';
+import Slider from '@mui/material/Slider';
+const categories = [
+    "laptop",
+    "tv",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+  ];
+
 
 function Products(props) {
     const { keyword } = useParams();
     const key = keyword;
     const dispatch = useDispatch();
-    const [ currentPage, setCurrentPage] = useState(2);
-    const { products, loading, resultPerPage, prodCount } = useSelector((state) => state.products);
+    const [ currentPage, setCurrentPage] = useState(1);
+    const [price, setPrice] = useState([0, 25200]);
+    const [category, setCategory] = useState("");
+    const [ratings, setRatings] = useState(0);
+
+    const { products, loading, resultPerPage, prodcount} = useSelector((state) => state.products);
     const setCurrentPageNo = (e)=>{
         setCurrentPage(e)   
     }
-
+    const priceHandler = (event, newPrice) => {
+        setPrice(newPrice);
+      };
     useEffect(() => {
-        dispatch(getProduct(key,currentPage));
-    }, [dispatch, key,currentPage]);
-    console.log(currentPage)
+        dispatch(getProduct(key,currentPage,price,category,ratings));
+    }, [dispatch, key,currentPage,price,category,ratings]);
+    // console.log(currentPage)
+    //let count = filteredProductsCount;
 
     return (
         <Fragment>{loading ? <Loader /> :
@@ -31,11 +50,48 @@ function Products(props) {
                         <ProductCard key = {product._id} product={product} />
                     ))}
                 </div>
-                <div className="paginationBox">
+                <div className="filterBox">
+                    <Typography>Price</Typography>
+                    <Slider
+                        value={price}
+                        onChange={priceHandler}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                        min={0}
+                        max={25200}
+                    />
+                    <Typography>Categories</Typography>
+            <ul className="categoryBox">
+              {categories.map((category) => (
+                <li
+                  className="category-link"
+                  key={category}
+                  onClick={() => setCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+            <fieldset>
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
+                value={ratings}
+                onChange={(e, newRating) => {
+                  setRatings(newRating);
+                }}
+                aria-labelledby="continuous-slider"
+                valueLabelDisplay="auto"
+                min={0}
+                max={5}
+              />
+            </fieldset>
+
+                </div>
+                    <div className="paginationBox">
               <Pagination
                 currentPage={currentPage}
                 itemsCountPerPage={resultPerPage}
-                totalItemsCount={prodCount}
+                totalItemsCount={prodcount}
                 onChange={setCurrentPageNo}
                 nextPageText="Next"
                 prevPageText="Prev"
@@ -45,7 +101,7 @@ function Products(props) {
                 linkClass="page-link"
                 activeClass="pageItemActive"
                 activeLinkClass="pageLinkActive"
-              />
+                />
             </div>
 
             </Fragment>}
