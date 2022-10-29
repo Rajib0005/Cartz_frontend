@@ -16,7 +16,6 @@ function Products(props) {
         dispatch(getProduct(key));
     }, [dispatch, key]);
 
-//    console.log(key)
 
     return (
         <Fragment>{loading ? <Loader /> :
