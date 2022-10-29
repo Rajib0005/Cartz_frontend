@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 function Products(props) {
     const { keyword } = useParams();
+    console.log(keyword);
     const key = keyword;
     const dispatch = useDispatch();
     const { products, loading } = useSelector((state) => state.products);
