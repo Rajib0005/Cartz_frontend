@@ -9,7 +9,6 @@ import Loader from '../layout/Loader/Loader';
 
 
 const Home = () => {
-
   const dispatch = useDispatch();
   const {loading,products,resultPerPage} = useSelector(
     state => state.products
@@ -19,7 +18,7 @@ const Home = () => {
     dispatch(getProduct())
   }, [dispatch]);
 
-
+  
 
   return (
     <Fragment>
@@ -51,4 +50,3 @@ const Home = () => {
 }
 
 export default Home
-

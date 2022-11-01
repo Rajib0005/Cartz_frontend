@@ -20,7 +20,6 @@ const ProductDetails = (props) => {
     useEffect(() => {
         dispatch(getProductDetails(productId));
     }, [dispatch, productId]);
-    console.log(product);
 
 
     // const options = {
