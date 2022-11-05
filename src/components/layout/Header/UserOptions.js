@@ -7,6 +7,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import {useNavigate} from 'react-router-dom'
 import { logout } from '../../../actions/userAction';
+import "./Header.css"
+import Backdrop from '@mui/material/Backdrop';
 
 
 const UserOptions = () => {
@@ -45,6 +47,7 @@ const UserOptions = () => {
   }
   return (
     <Fragment>
+      <Backdrop open={open} style={{zIndex: "10"}}/>
      <SpeedDial
      ariaLabel="SpeedDial tooltip example"
      onClose={() => setOpen(false)}
@@ -52,6 +55,7 @@ const UserOptions = () => {
      style={{ zIndex: "11" }}
      open={open}
      direction="down"
+     className='speedDial'
      icon={
       <img
         className="speedDialIcon"
