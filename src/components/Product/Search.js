@@ -4,20 +4,28 @@ import "./Search.css";
 import {useNavigate} from 'react-router-dom'
 
 const Search = () => {
-  const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
-  const searchSubmitHandler = (e) => {
-    e.preventDefault();
-    if (keyword.trim()) {
-        navigate(`/products/${keyword}`);
-    } else {
-        navigate("/products");
-    }
-  };
+    const [keyword, setKeyword] = useState("");
+    
+    //console.log(keyword.get('sort'));
+    const searchSubmitHandler = (e) => {
+      e.preventDefault();
+
+      //console.log(keyword);
+
+      if (keyword.trim()) {
+       navigate(`/products?keyword=${keyword}`);
+      } else {
+        navigate('/products');
+      }
+
+    };
+
+
 
   return (
     <Fragment>
-      <MetaData title="Search A Product -- ECOMMERCE" />
+      <MetaData title="Search A Product -- Cartz" />
       <form className="searchBox" onSubmit={searchSubmitHandler}>
         <input
           type="text"
@@ -27,7 +35,8 @@ const Search = () => {
         <input type="submit" value="Search" />
       </form>
     </Fragment>
+  
   );
 };
 
-export default Search;
+export default Search;

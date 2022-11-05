@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getProduct } from '../../actions/productActions';
 import Loader from '../layout/Loader/Loader'
 import ProductCard from '../Home/ProductCard';
-import { useParams } from 'react-router-dom';
+import './Products.css'
+import {useLocation} from 'react-router-dom';
 import Pagination from 'react-js-pagination';
-import "./Products.css";
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
+
+
 const categories = [
     "laptop",
     "tv",
@@ -18,28 +20,27 @@ const categories = [
     "SmartPhones",
   ];
 
-
-function Products(props) {
-    const { keyword } = useParams();
-    const key = keyword;
-    const dispatch = useDispatch();
-    const [ currentPage, setCurrentPage] = useState(1);
-    const [price, setPrice] = useState([0, 25200]);
+function Products() {
+    const location = useLocation().search;
+    const name = new URLSearchParams(location).get('keyword');
+    const key = name || '';
+   const dispatch = useDispatch();
+   const [currentPage, setCurrentPage] = useState(1);
+   const [price, setPrice] = useState([0, 25200]);
     const [category, setCategory] = useState("");
     const [ratings, setRatings] = useState(0);
-
-    const { products, loading, resultPerPage, prodcount} = useSelector((state) => state.products);
+    const { products, loading, resultPerPage, prodcount } = useSelector((state) => state.products);
     const setCurrentPageNo = (e)=>{
         setCurrentPage(e)   
     }
+ 
     const priceHandler = (event, newPrice) => {
         setPrice(newPrice);
-      };
+      }
+
     useEffect(() => {
         dispatch(getProduct(key,currentPage,price,category,ratings));
-    }, [dispatch, key,currentPage,price,category,ratings]);
-    // console.log(currentPage)
-    //let count = filteredProductsCount;
+    }, [dispatch, key,currentPage,price,category,ratings])
 
     return (
         <Fragment>{loading ? <Loader /> :
@@ -109,4 +110,4 @@ function Products(props) {
     )
 }
 
-export default Products
+export default Products
