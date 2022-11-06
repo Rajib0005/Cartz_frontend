@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import UserOptions from "./components/layout/Header/UserOptions.js"
 import Profile from "./components/User/Profile.js"
+import ProtectedRoute from "./components/Route/ProtectedRoute";
 function App() {
   const {user,isAuthenticated } = useSelector(
     (state) => state.user
@@ -40,7 +41,7 @@ function App() {
         <Route  exact path='/products' element={<Products />} />
         <Route  exact path='/search' element={<Search />} />
         <Route  exact path='/login' element={<LoginSignup />} />
-        <Route  exact path='/account' element={<Profile />} />
+        <Route  exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route  path='/products/:keyword' element={<Products />} />
 
       </Routes>
