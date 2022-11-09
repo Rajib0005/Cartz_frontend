@@ -10,6 +10,9 @@ import {
     LOAD_USER_SUCCESS,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAIL,
     LOAD_USER_FAIL,
 } from "../constants/userConstants" 
 import axios from "axios"
@@ -55,6 +58,7 @@ export const register = (userData) => async (dispatch) => {
             const { data } = await axios.get(`/api/me`);
         
             dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+            console.log(data.user);
           } catch (error) {
             dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
           }
@@ -66,6 +70,25 @@ export const register = (userData) => async (dispatch) => {
           dispatch({ type: LOGOUT_SUCCESS });
         } catch (error) {
           dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+        }
+      };
+      // update profile
+      export const updateProfile = (userData) => async (dispatch) => {
+        try {
+          dispatch({ type: UPDATE_PROFILE_REQUEST });
+      
+          const config = { headers: { "Content-Type": "multipart/form-data" } };
+          // console.log(userData)
+          const { data } = await axios.put(`/api/me/update`, userData, config);
+          // console.log(data);
+          dispatch({ type:  UPDATE_PROFILE_SUCCESS, payload: data.user });
+          console.log(data.user);
+         
+        } catch (error) {
+          dispatch({
+            type:  UPDATE_PROFILE_FAIL,
+            payload: error.response.data.message,
+          });
         }
       };
 export const clearErrors = () => async (dispatch) => {
