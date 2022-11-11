@@ -69,6 +69,6 @@ export const productDetailsReducer = (
           }
 
       default:
-          return state;
-  }
+          return state;
+  }
 }
